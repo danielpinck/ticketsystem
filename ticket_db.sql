@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2024 at 02:25 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Erstellungszeit: 07. Mai 2024 um 17:05
+-- Server-Version: 10.4.32-MariaDB
+-- PHP-Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ticket_db`
+-- Datenbank: `ticket_db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Tabellenstruktur für Tabelle `categories`
 --
 
 CREATE TABLE `categories` (
@@ -35,7 +35,7 @@ CREATE TABLE `categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notes`
+-- Tabellenstruktur für Tabelle `notes`
 --
 
 CREATE TABLE `notes` (
@@ -48,7 +48,7 @@ CREATE TABLE `notes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tickets`
+-- Tabellenstruktur für Tabelle `tickets`
 --
 
 CREATE TABLE `tickets` (
@@ -64,7 +64,7 @@ CREATE TABLE `tickets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ticket_support`
+-- Tabellenstruktur für Tabelle `ticket_support`
 --
 
 CREATE TABLE `ticket_support` (
@@ -75,36 +75,37 @@ CREATE TABLE `ticket_support` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabellenstruktur für Tabelle `users`
 --
 
 CREATE TABLE `users` (
   `uid` int(4) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `privileges` int(1) NOT NULL DEFAULT 1,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`uid`, `name`, `privileges`, `password`) VALUES
+INSERT INTO `users` (`uid`, `username`, `privileges`, `password`) VALUES
 (16, 'a', 1, 'b'),
-(18, 'admin', 3, 'pw');
+(18, 'admin', 3, 'pw'),
+(19, 'test', 1, '$2y$10$d2PJffcA/XltQpuPrRNmwuPny1tyG9LrE4kcKIDMED/4qVBzckUb2');
 
 --
--- Indexes for dumped tables
+-- Indizes der exportierten Tabellen
 --
 
 --
--- Indexes for table `categories`
+-- Indizes für die Tabelle `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`cid`);
 
 --
--- Indexes for table `notes`
+-- Indizes für die Tabelle `notes`
 --
 ALTER TABLE `notes`
   ADD PRIMARY KEY (`nid`),
@@ -112,74 +113,73 @@ ALTER TABLE `notes`
   ADD KEY `uid` (`uid`);
 
 --
--- Indexes for table `tickets`
+-- Indizes für die Tabelle `tickets`
 --
 ALTER TABLE `tickets`
   ADD PRIMARY KEY (`tid`),
-  ADD KEY `cid` (`cid`),
-  ADD KEY `cid_2` (`cid`);
+  ADD KEY `cid` (`cid`);
 
 --
--- Indexes for table `ticket_support`
+-- Indizes für die Tabelle `ticket_support`
 --
 ALTER TABLE `ticket_support`
   ADD KEY `uid` (`uid`),
   ADD KEY `tid` (`tid`);
 
 --
--- Indexes for table `users`
+-- Indizes für die Tabelle `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`uid`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD UNIQUE KEY `name` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT für exportierte Tabellen
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT für Tabelle `categories`
 --
 ALTER TABLE `categories`
   MODIFY `cid` int(2) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `notes`
+-- AUTO_INCREMENT für Tabelle `notes`
 --
 ALTER TABLE `notes`
   MODIFY `nid` int(2) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tickets`
+-- AUTO_INCREMENT für Tabelle `tickets`
 --
 ALTER TABLE `tickets`
   MODIFY `tid` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `uid` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- Constraints for dumped tables
+-- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints for table `notes`
+-- Constraints der Tabelle `notes`
 --
 ALTER TABLE `notes`
   ADD CONSTRAINT `notes_ibfk_1` FOREIGN KEY (`tid`) REFERENCES `tickets` (`tid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `notes_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `tickets`
+-- Constraints der Tabelle `tickets`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `categories` (`cid`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `ticket_support`
+-- Constraints der Tabelle `ticket_support`
 --
 ALTER TABLE `ticket_support`
   ADD CONSTRAINT `ticket_support_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE SET NULL ON UPDATE CASCADE,
