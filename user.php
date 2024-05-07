@@ -3,7 +3,7 @@
 class User {
   private $username;
   private $password;
-  private $privileges;
+  private $rolle;
   private $db;
 
   public function __construct($db) {
@@ -24,39 +24,48 @@ class User {
     
     $sql_createuser = "INSERT INTO users (name, password) VALUES (?, ?)";
 
-    $createuser = $this->db->execute_query($sql_createuser, [$this->username, $this->password]);
+    $createuser = $this->db->execute_query($sql_createuser, [$this->username, password_hash($this->password, PASSWORD_DEFAULT)]);
     
   }
 
   
-  public function setPrivileges($privileges) {
-    $this->privileges = $privileges;
+  public function setRolle($rolle) {
+    $this->rolle = $rolle;
 
   }
 
-  public function getPrivileges($privileges) {
+  public function getRolle() {
+    $rolle_query = "SELECT 'role' FROM users WHERE 'username' = ?";
+
+    $result = $this->db->execute_query($rolle_query, [$this->username]);
+    return $result;
 
   }
 
 
 
   public function getUser() {
-    $checklogin = "SELECT * FROM users WHERE name = ? AND password = ?";
+    $checklogin = "SELECT * FROM users WHERE username = ? AND password = ?";
 
     $result = $this->db->execute_query($checklogin, [$this->username, $this->password]);
-  
-    echo "Welcome, " . $this->username . ". Your password is: ". $this->password;
-    
-    if ($result->num_rows>0) {
-      foreach ($result as $row) {
+    // getRolle();
+    if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+      $sessionhandler = new SessionHandling();
+      $sessionhandler->setSessionValue("username", $row['username']);
+      $sessionhandler->setSessionValue("user_id", $row['uid']);
+      $sessionhandler->setSessionValue("rolle", $row['privileges']);
+      $session_username = $sessionhandler->getSessionValue("username");
+      $session_rolle = $sessionhandler->getSessionValue("rolle");
+      echo $session_username;
+      echo $session_rolle;
 
-      echo "Welcome, " . $this->username . ". Your password is: ". $this->password . " Privileges: " . $row["privileges"];
+    } else {
+      var_dump($result);//"Anmeldung nicht erfolgreich.";
     }
-    $user = [$this->username, $this->password];
-    var_dump($user);
-    return $user;
     
-  }
+    
+    return $result;
   }
 
 }
