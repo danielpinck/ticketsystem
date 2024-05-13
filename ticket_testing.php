@@ -22,8 +22,12 @@ $sessionhandler = new SessionHandling();
 
 
 $ticket = new Ticket($conn);
+$sessionhandler->getSessionValue("rolle");
+$sessionhandler->getSessionValue("user_id");
+echo "Rolle: " . $_SESSION['rolle'];
+echo "User ID " . $_SESSION['user_id'];
 
-foreach($ticket->getTicketInfo() as $row) {
+foreach($ticket->getAllTickets() as $row) {
   foreach($row as $key => $value) {
     echo "$key: $value <br>";
 }

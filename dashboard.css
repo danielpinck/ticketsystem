@@ -1,0 +1,132 @@
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.column {
+  display: flex;
+}
+
+.left-column {
+  background-color: #f0f0f0;
+  padding-left: 20px;
+  padding-top: 50px;
+  flex-basis: 15%;
+  min-width: auto;
+}
+
+.right-column {
+  background-color: #e0e0e0;
+  padding-top: 50px;
+  flex-basis: 85%;
+
+  justify-content: center;
+}
+
+.header-item-rubrik {
+  background-color:white;
+  
+  display:block;
+  color: black;
+  font-weight: bold;
+  /* width: 50%; */
+  padding: 20px;
+  font-size: 1.5em;
+  text-align: center;
+  
+  /* border: 1px solid black; */
+}
+.body-item-anzeige {
+  background-color:bisque;
+  display:inline;
+  color: black;
+  font-weight: bold;
+  width: 50%;
+  min-width: fit-content;
+  padding: 20px;
+  font-size: 1.5em;
+  text-align: center;
+  
+  /* border: 1px solid black; */
+}
+
+.flex-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-layout {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 2%;
+  justify-content: flex-start;
+  
+  
+
+  /* width: 70%; */
+  
+}
+
+textarea {
+  width:70%;
+  resize: none;
+}
+
+#titel {
+  width:100%;
+}
+
+.parent {
+  display:grid;
+  width:fit-content;
+  min-width: 400px;
+  grid-template-columns: auto auto ;
+  grid-template-rows: auto auto auto auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  /* box-sizing: border-box; */
+  margin: 15px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  /* border: 2px solid black; */
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+  }
+
+  .bild { 
+    grid-area: 1 / 1 / 5 / 2; 
+    background-color: rgb(255, 255, 255);        
+    }
+
+  .titel { 
+    grid-area: 1 / 2 / 2 / 3; 
+    background-color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: large;
+    padding: 5px;
+    
+  }
+  .beschreibung { 
+    padding: 5px;
+    grid-area: 2 / 2 / 3 / 3; 
+    background-color: rgb(255, 255, 255);
+  }
+  .email { 
+    padding: 5px;
+    grid-area: 3 / 2 / 4 / 3; 
+    background-color: rgb(255, 255, 255);
+  }
+  .rubrik { 
+    padding: 5px;
+    grid-area: 4 / 2 / 5 / 3; 
+    background-color: rgb(255, 255, 255);
+  } 

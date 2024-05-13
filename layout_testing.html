@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Example</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .column {
+      display: flex;
+    }
+
+    .left-column {
+      background-color: #f0f0f0;
+      padding-left: 20px;
+      padding-top: 50px;
+      flex-basis: 15%;
+      min-width: auto;
+    }
+
+    .right-column {
+      background-color: #e0e0e0;
+      padding-top: 50px;
+      flex-basis: 85%;
+
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="column left-column">LeftColumnLeft ColumnLeft Column</div>
+    <div class="column right-column">Right Column</div>
+  </div>
+</body>
+</html>

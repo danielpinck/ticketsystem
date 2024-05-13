@@ -7,13 +7,17 @@ class Ticket {
     private $category;
     private $timeCreated;
     private $status;
+    private $priority;
     private $db;
 
 
     public function __construct($db) {
         $this->db = $db;
-
     }
+
+    // public function setTicketId($tid) {
+    //   $this->tid = $tid;
+    // }
     
     public function setTicketTitle($title) {
         $this->title = $title;
@@ -27,6 +31,10 @@ class Ticket {
         $this->category = $category;
       }
 
+    public function setTicketPriority($priority) {
+        $this->priority = $priority;
+      }
+
     public function setTicketTimeCreated($timeCreated) {
         $this->timeCreated = $timeCreated;
       }
@@ -35,7 +43,7 @@ class Ticket {
         $this->status = $status;
       }
 
-      public function getTicketInfo() {
+      public function getAllTickets() {
         $ticketQuery = "SELECT * FROM tickets";
         $ticketArray = array();
 
@@ -44,6 +52,51 @@ class Ticket {
             $ticketArray[] = $row;
         }
         return $ticketArray;
+        
+      }
+
+      public function getSingleTicket($tid) {
+        // mysql statement
+        $ticketQuery = "SELECT * FROM tickets WHERE tid = ?";
+    
+        // execute mysql query
+        $ticketResult = $this->db->execute_query($ticketQuery, [$tid]);
+        
+        // check if query was successful
+        if ($ticketResult) {
+            // fetch & return $ticketResult
+            $row = $ticketResult->fetch_assoc();
+            $customArray = array(
+              "Titel"=> $row["title"],
+              "Beschreibung"=> $row["description"],
+              "Erstellt am"=> $row["timestamp"],
+              "Priorität"=> $row["priority"],
+              "Status"=> $row["status"]
+            );
+            return $customArray;
+        } else {
+            // for error handling. not implemented
+            return false;
+        }
+            
+          }
+
+      public function createTicket() {
+    
+        $sqlCreateTicket = "INSERT INTO tickets (description, category, priority, title) VALUES (?, ?, ?, ?)";
+    
+        $createTicket = $this->db->execute_query($sqlCreateTicket, [$this->description, $this->category, $this->priority, $this->title]);
+        $tid = mysqli_insert_id($this->db);
+        return $tid;
+        
+        
+        // $sqlTicketUserId = "INSERT INTO ticket_support (uid, tid) VALUES (?, ?)";
+    
+        // $ticketUserId = $this->db->execute_query($sqlTicketUserId, [$this->description, $this->category, $this->priority, $this->title]);
+        // $result = $createTicket->fetch_assoc();
+
+
+        // return $result;
         
       }
 
