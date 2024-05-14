@@ -6,6 +6,7 @@ class SessionHandling {
   public function __construct() {
     if (session_status() != PHP_SESSION_ACTIVE) {
       session_start();
+      
   }
   }
 
@@ -23,6 +24,14 @@ class SessionHandling {
 
   public function destroySession() {
     session_destroy();
+  }
+
+  public function setLoggedOutMessage($message) {
+    $this->setSessionValue('logged_out_message', $message);
+  }
+
+  public function getLoggedOutMessage() {
+    return $this->getSessionValue('logged_out_message');
   }
 
 }

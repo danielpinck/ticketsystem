@@ -3,9 +3,5 @@ include "SessionHandler.php";
 $sessionhandler = new SessionHandling();
 
 
-if (session_id()) {
-  echo "<h1>Welcome, ".$_SESSION['username']."!</h1>";
-} else {
-  echo "You have been logged out";
-  echo '<a href="index_testing.php">Back to main</a>';
-}
+echo "<h1>Welcome, ".$sessionhandler->getSessionValue('username')."!</h1>";
+echo "<h1>Welcome, ".$sessionhandler->getLoggedOutMessage('logged_out_message')."!</h1>";

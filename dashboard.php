@@ -23,7 +23,7 @@ echo "<p>This is your dashboard.</p>";
 
 
 echo '<a href="destroy_session.php">Logout</a><br>';
-echo '<a href="index_testing.php">Login</a><br>';
+echo '<a href="index_testing2.php">Login</a><br>';
 
 // Include the footer
 include "footer.php";

@@ -2,6 +2,10 @@
 
     <div class="signin-box">
     <h1>Helpdesk BFW</h1>
+    <p>
+      <?php 
+
+      ?></p>
     <h2>Sign In</h2>
     <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
       <input type="text" name="username" placeholder="Username" required>
