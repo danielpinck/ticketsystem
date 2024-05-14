@@ -4,7 +4,12 @@
     <h1>Helpdesk BFW</h1>
     <p>
       <?php 
+      $logoutMessage = $sessionhandler->getLoggedOutMessage();
 
+      // Check if the custom logout message exists and display it
+      if (empty($_SESSION["logged_out_message"]) || !isset($_SESSION["logged_out_message"])) { 
+          echo $logoutMessage;
+      }
       ?></p>
     <h2>Sign In</h2>
     <form action="<?php $_SERVER['PHP_SELF']?>" method="post">

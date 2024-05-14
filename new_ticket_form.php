@@ -4,7 +4,7 @@
         
         <input type="text" id="title" name="title" placeholder="Titel" required>
         
-        <textarea id="description" name="description" placeholder="Beschreibung" required></textarea>
+        <textarea id="description" name="description" placeholder="Beschreibung" required rows="7"></textarea>
         
         <!-- <label for="category">Kategorie:</label> -->
         <select id="category" name="category" required>

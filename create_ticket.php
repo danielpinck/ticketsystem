@@ -1,9 +1,9 @@
 <?php
-$css_file = "ticket.css";
+$css_file = "ticket_support.css";
 include "header.php";
 // Database Connection class
 include "DatabaseConnection.php";
-include "ticketclass.php";
+include "ticket.php";
 include "SessionHandler.php";
 
 

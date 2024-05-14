@@ -1,6 +1,6 @@
 <?php 
 // sets the css file to be used
-$css_file = "dashboard.css";
+$css_file = "login.css";
 
 // include the header
 include "header.php";
@@ -29,13 +29,8 @@ $sessionhandler = new SessionHandling();
 if (empty($_SESSION["username"]) || !isset($_SESSION["username"])) { 
     
     
-    $logoutMessage = $sessionhandler->getLoggedOutMessage();
-
-    // Check if the custom logout message exists and display it
-    if ($logoutMessage) {
-        echo $logoutMessage;
-    }
-    include_once "login.php";
+    
+    include_once "login_template.php";
     // Process form data
     $user = new User($conn);
     if (isset($_POST["username"]) && !empty($_POST["username"]) && 

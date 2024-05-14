@@ -21,42 +21,49 @@ $dbconnection = new DatabaseConnection($servername, $username_sql, $password_sql
 $conn = $dbconnection->getConnection();
 $sessionhandler = new SessionHandling();
 
-$ticket_id = $_GET['tid'];
+
 $ticket = new Ticket($conn);
-$singleTicket = $ticket->getSingleTicket($ticket_id);
 $sessionhandler->getSessionValue("rolle");
 $sessionhandler->getSessionValue("user_id");
 // echo "Rolle: " . $_SESSION['rolle'];
 // echo "User ID " . $_SESSION['user_id'];
-
+$status = isset($_GET['status']) ? $_GET['status'] : null;
+$category = isset($_GET['category']) ? $_GET['category'] : null;
+$ticket_id = isset($_GET['tid']) ? $_GET['tid'] : null;
 ?>
-<div class="ticket-info">
-    <div class="ticket-container">
-<a href="ticket_support.php" class="ticket-status">Zurück</a>
-</div>
-</div>
-<div class="ticket-info">
-    <div class="ticket-container">
 
-    
+
+
+
+<div class="ticket-info">
+<div class="ticket-container">
+<a href="?status=neu" class="ticket-status">Neu</a>
+<a href="?category=E-Mail" class="ticket-status">E-Mail</a>
+<a href="?category=Hardware" class="ticket-status">Hardware</a>
+<a href="?category=Citrix" class="ticket-status">Citrix</a>
+<a href="?" class="ticket-status">Alle</a>
+</div>
+  <?php foreach ($ticket->getAllTickets($status, $category, $ticket_id) as $row) { ?>
+    <a href="ticket_testing.php?tid=<?php echo $row['Ticket ID']; ?>">
+    <div class="ticket-container">
       <div class="ticket-header">
-        <p class="ticket-id"><?php echo $singleTicket['Ticket ID']; ?></p>
-        <p class="ticket-status"><?php echo $singleTicket['Status']; ?></p>
+        <p class="ticket-id"><?php echo $row['Ticket ID']; ?></p>
+        <p class="ticket-status"><?php echo $row['Status']; ?></p>
       </div>
       <div class="ticket-title">
-        <p><<?php echo $singleTicket['Titel']; ?></p>
+        <p><?php echo $row['Titel']; ?></p>
       </div>
       <div class="ticket-description">
-        <p><strong>Beschreibung:</strong><?php echo $singleTicket['Beschreibung']; ?></p>
+        <p><strong>Beschreibung:</strong> <?php echo $row['Beschreibung']; ?></p>
       </div>
       <div class="ticket-details">
         <div class="ticket-detail-left">
-          <p><strong>Kategorie:</strong><?php echo $singleTicket['Kategorie']; ?></p>
-          <p><strong>Priorität:</strong><?php echo $singleTicket['Priorität']; ?></p>
-          <p><strong>Erstellt von:</strong><?php echo $singleTicket['Erstellt von']; ?></p>
+          <p><strong>Kategorie:</strong> <?php echo $row['Kategorie']; ?></p>
+          <p><strong>Priorität:</strong> <?php echo $row['Priorität']; ?></p>
+          <p><strong>Erstellt von:</strong> <?php echo $row['Erstellt von']; ?></p>
         </div>
         <div class="ticket-detail-right">
-          <p><strong>Erstellt am:</strong><?php echo $singleTicket['Erstellt am']; ?></p>
+          <p><strong>Erstellt am:</strong> <?php echo $row['Erstellt am']; ?></p>
         </div>
       </div>
      
@@ -65,21 +72,9 @@ $sessionhandler->getSessionValue("user_id");
         <!-- Placeholder for existing support notes -->
       </div>
       
-      <div class="new-support-note">
-      <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
-        <textarea placeholder="Neue Support-Notiz" style="width: 70%;"></textarea>
-      </div>
-      <div class="change-status">
-      <select id="status" name="status">
-        <option value="" disabled selected>Change the Status</option>
-            <option value="niedrig">neu</option>
-            <option value="mittel">In Bearbeitung</option>
-            <option value="hoch">Fertig</option>
-        </select>
-      </div>
-      <button type="submit">Speichern</button>
-</form>
     </div>
+  </a>
+  <?php } ?>
 </div>
 
 

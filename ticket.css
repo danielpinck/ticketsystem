@@ -1,4 +1,4 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -7,6 +7,7 @@ body {
   align-items: center;
   background-color: #f0f0f0;
   font-family: sans-serif;
+  font-size: small;
 }
 
 .ticket-form {
@@ -35,6 +36,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+  resize: none;
   
 }
 
@@ -57,26 +59,29 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
-  max-width: 25%; /* Set maximum width */
+  max-width: 450px; /* Set maximum width */
   margin: 0 auto; /* Center the box horizontally */
 
 }
 
-.ticket-info h1 {
+
+.ticket-info h2 {
   margin-bottom: 20px;
+  font-size: small;
+}
+
+.ticket-container {
+  background-color: #f5f5f5; /* Light gray background color */
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #ccc; 
 }
 
 .ticket-info .ticket-data {
-  background-color: #f5f5f5; /* Light gray background color */
-  padding: 10px;
-  /* padding-left: 25px;
-  padding-right: 25px; */
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  word-wrap: break-word;
+  padding: 5px 0; /* Add padding between rows */
 }
 
 .ticket-info .ticket-data p {
   margin: 0; /* Reset margin */
 }
+
