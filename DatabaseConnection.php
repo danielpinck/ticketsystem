@@ -27,6 +27,21 @@ class DatabaseConnection {
     public function closeConnection() {
         $this->conn->close();
     }
+
+    public function fetchEnumValues($table, $column) {
+        $query = "SELECT COLUMN_TYPE FROM information_schema.COLUMNS 
+                  WHERE TABLE_NAME = ? AND COLUMN_NAME = ?";
+        
+        $result = $this->conn->execute_query($query, [$table, $column]);
+        if ($result) {
+            $row = $result->fetch_assoc();
+            $enumString = $row['COLUMN_TYPE'];
+            preg_match_all("/'([^']+)'/", $enumString, $matches);
+            return $matches[1];
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>

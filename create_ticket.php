@@ -1,5 +1,5 @@
 <?php
-$css_file = "ticket_support.css";
+$css_file = "ticket.css";
 include "header.php";
 // Database Connection class
 include "DatabaseConnection.php";

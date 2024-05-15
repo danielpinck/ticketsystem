@@ -26,8 +26,39 @@ $ticket = new Ticket($conn);
 $singleTicket = $ticket->getSingleTicket($ticket_id);
 $sessionhandler->getSessionValue("rolle");
 $sessionhandler->getSessionValue("user_id");
-// echo "Rolle: " . $_SESSION['rolle'];
-// echo "User ID " . $_SESSION['user_id'];
+$uid = $singleTicket['User ID'];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
+  $notiz = $_POST['notiz'];
+  $status = $_POST['status'];
+
+
+  // if (isset($_POST["notiz"]) and !empty($_POST["notiz"]) and 
+  // isset($_POST["status"]) and !empty($_POST["status"])) {
+
+      $createNotiz = $ticket->createNotiz($ticket_id, $uid, $notiz);
+      $ticket->changeStatus($ticket_id, $status);
+      
+      
+  if ($createNotiz) {
+
+      
+      $singleTicket = $ticket->getSingleTicket($ticket_id);
+      
+      
+      if ($singleTicket) {
+          include 'ticket_template.php';
+      } else {
+          echo "Error retrieving the ticket.";
+      }
+      exit;
+  }
+  } 
+  else {
+      echo "Fill in all fields.";
+  }
+// }
 
 ?>
 <div class="ticket-info">
@@ -62,19 +93,32 @@ $sessionhandler->getSessionValue("user_id");
      
       <div class="support-notes">
         <p><strong>Support Notizen:</strong></p>
+        
+        <?php 
+        $getNotiz = $ticket->getNotiz($singleTicket['Ticket ID']);
+
+        if ($getNotiz) {
+          // var_dump($getNotiz);
+          foreach ($getNotiz as $row) {
+            echo "<div class='notiz-box'>" . $row['Notiz'] . $row['User ID'] . "</div><br>";
+          }
+
+        }
+        ?>
+        
         <!-- Placeholder for existing support notes -->
       </div>
       
       <div class="new-support-note">
-      <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
-        <textarea placeholder="Neue Support-Notiz" style="width: 70%;"></textarea>
+      <form action="ticket_testing.php?tid=<?php echo $ticket_id?>" method="post">
+        <textarea id="notiz" name="notiz"  placeholder="Neue Support-Notiz" style="width: 70%;"></textarea>
       </div>
       <div class="change-status">
       <select id="status" name="status">
-        <option value="" disabled selected>Change the Status</option>
-            <option value="niedrig">neu</option>
-            <option value="mittel">In Bearbeitung</option>
-            <option value="hoch">Fertig</option>
+        <option value="" disabled>Change the Status</option>
+            <option value="Neu"<?php if ($singleTicket['Status'] == "Neu") echo " selected"?>>neu</option>
+            <option value="In Bearbeitung"<?php if ($singleTicket['Status'] == "In Bearbeitung") echo " selected"?>>In Bearbeitung</option>
+            <option value="Fertig"<?php if ($singleTicket['Status'] == "Fertig") echo " selected"?>>Fertig</option>
         </select>
       </div>
       <button type="submit">Speichern</button>

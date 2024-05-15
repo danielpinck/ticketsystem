@@ -1,5 +1,10 @@
 
 <div class="ticket-info">
+    <div class="ticket-container">
+<a href="ticket_support.php" class="ticket-status">Zurück</a>
+</div>
+</div>
+<div class="ticket-info">
   <div class="ticket-container">
     <div class="ticket-header">
       <p class="ticket-id"><?php echo $singleTicket['Ticket ID']; ?></p>

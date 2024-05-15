@@ -17,8 +17,24 @@ html {
   margin: 0 auto;
   margin-bottom: 15px;
   max-width: 600px; /* Set a fixed maximum width */
+  min-width: 600px; /* Set a fixed maximum width */
   box-sizing: border-box;
 
+}
+.link-container {
+  display: inline-block;
+
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  margin: 0 auto;
+
+  max-width: 600px; 
+  min-width: 600px; 
+  box-sizing: border-box;
 }
 
 a {
@@ -49,11 +65,49 @@ a:focus {
 }
 
 .ticket-status {
+  display: inline-block;
+  margin-bottom: 5px;
   background-color: lightblue;
   padding: 5px 10px;
   border-radius: 5px;
-  margin: 0;
 }
+.ticket-active-stat {
+  display: inline-block;
+  margin-bottom: 5px;
+  background-color: rgb(2, 146, 194);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.ticket-category {
+  display: inline-block;
+  margin-bottom: 5px;
+  background-color: rgb(247, 151, 138);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.ticket-active-cat {
+  display: inline-block;
+  margin-bottom: 5px;
+  background-color: rgb(255, 95, 74);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.ticket-priority {
+  display: inline-block;
+  margin-bottom: 5px;
+  background-color: rgb(254, 254, 169);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.ticket-active-prio {
+  display: inline-block;
+  margin-bottom: 5px;
+  background-color: rgb(218, 231, 75);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
 
 .ticket-title {
   margin-top: 10px;
@@ -102,4 +156,11 @@ button {
 
 button:hover {
   background-color: #004288;
+}
+.notiz-box {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }

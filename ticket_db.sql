@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 14. Mai 2024 um 16:16
+-- Erstellungszeit: 15. Mai 2024 um 17:40
 -- Server-Version: 10.4.32-MariaDB
 -- PHP-Version: 8.2.12
 
@@ -34,6 +34,25 @@ CREATE TABLE `notes` (
   `text` varchar(1500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Daten für Tabelle `notes`
+--
+
+INSERT INTO `notes` (`nid`, `tid`, `uid`, `text`) VALUES
+(4, 21, 18, 'test notiz new'),
+(5, 21, 18, 'ggdfgfdg'),
+(6, 21, 18, 'hfdhfdhdfh'),
+(7, 18, 18, 'sdfsdfsdf'),
+(15, 21, 18, 'hfghfghfgh'),
+(16, 21, 18, 'fsdfsf'),
+(17, 21, 18, 'fsdfsf'),
+(18, 21, 18, 'sdfsdf'),
+(19, 21, 18, 'fsdfsf'),
+(20, 21, 18, 'fsdfs'),
+(21, 20, 18, 'fsdfs'),
+(22, 8, 18, 'gfdgdg'),
+(23, 21, 18, '');
+
 -- --------------------------------------------------------
 
 --
@@ -43,10 +62,10 @@ CREATE TABLE `notes` (
 CREATE TABLE `tickets` (
   `tid` int(10) NOT NULL,
   `description` varchar(1500) NOT NULL,
-  `category` enum('E-Mail','Windows','Hardware','Citrix','Software') NOT NULL,
+  `category` enum('E-Mail','Windows','Hardware','Citrix','Software','Sonstiges') NOT NULL,
   `priority` enum('niedrig','mittel','hoch','') NOT NULL,
   `timestamp` date NOT NULL DEFAULT current_timestamp(),
-  `status` enum('neu','in_bearbeitung','fertig','') NOT NULL DEFAULT 'neu',
+  `status` enum('Neu','In Bearbeitung','Fertig') NOT NULL DEFAULT 'Neu',
   `title` varchar(150) NOT NULL,
   `created_by` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -56,23 +75,22 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`tid`, `description`, `category`, `priority`, `timestamp`, `status`, `title`, `created_by`) VALUES
-(6, 'gdfgd', 'E-Mail', 'niedrig', '2024-05-14', 'neu', 'gfdgd', 18),
-(7, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'neu', 'E-Mail Anmeldung funktioniert nicht', 18),
-(8, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'neu', 'E-Mail Anmeldung funktioniert nicht', 18),
-(9, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'neu', 'E-Mail Anmeldung funktioniert nicht', 18),
-(10, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'neu', 'fsdfsdf jhgkhkjhk', 18),
-(11, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'neu', 'fsdfsdf jhgkhkjhk', 18),
-(12, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'Hardware', 'mittel', '2024-05-14', 'neu', 'E-Mail Anmeldung funktioniert nicht', 18),
-(13, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'neu', 'fsdfsdf jhgkhkjhk', 18),
-(14, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'neu', 'fsdfsdf jhgkhkjhk', 18),
-(15, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'neu', 'fsdfsdf jhgkhkjhk', 18),
-(16, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'neu', 'fsdfsdf jhgkhkjhk', 18),
-(17, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'neu', 'fsdfsdf jhgkhkjhk', 18),
-(18, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'neu', 'fsdfsdf jhgkhkjhk', 18),
-(19, 'Hardware Ticket Beschreibung', 'Hardware', 'niedrig', '2024-05-14', 'neu', 'Hardware Ticket', 18),
-(20, 'Citrix FehlermeldungCitrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung', 'Citrix', 'hoch', '2024-05-14', 'neu', 'Citrix Fehlermeldung', 18),
-(21, 'Beim Versuch, auf Citrix-Anwendungen zuzugreifen, erhalte ich eine Fehlermeldung, dass die Verbindung nicht hergestellt werden kann. Ich benötige dringend Zugriff auf meine Citrix-Anwendungen für meine Arbeit. Bitte helfen Sie mir, dieses Problem zu lösen.', 'Citrix', 'mittel', '2024-05-14', 'neu', 'Citrix Fehlermeldung', 18),
-(22, 'Mein Drucker druckt keine Dokumente mehr und zeigt Fehlermeldungen an. Ich habe bereits die Tintenpatronen überprüft und den Drucker neu gestartet, aber das Problem bleibt bestehen. Bitte unterstützen Sie mich bei der Fehlerbehebung meines Druckers.', 'Hardware', 'hoch', '2024-05-14', 'neu', 'Drucker druckt nicht', 18);
+(6, 'gdfgd', 'E-Mail', 'niedrig', '2024-05-14', 'Neu', 'gfdgd', 18),
+(7, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'Neu', 'E-Mail Anmeldung funktioniert nicht', 18),
+(8, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'In Bearbeitung', 'E-Mail Anmeldung funktioniert nicht', 18),
+(9, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'Neu', 'E-Mail Anmeldung funktioniert nicht', 18),
+(10, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
+(11, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
+(12, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'Hardware', 'mittel', '2024-05-14', 'Neu', 'E-Mail Anmeldung funktioniert nicht', 18),
+(13, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
+(14, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
+(15, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
+(16, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
+(17, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
+(18, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
+(19, 'Hardware Ticket Beschreibung', 'Hardware', 'niedrig', '2024-05-14', 'Neu', 'Hardware Ticket', 18),
+(20, 'Citrix FehlermeldungCitrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung', 'Citrix', 'hoch', '2024-05-14', 'In Bearbeitung', 'Citrix Fehlermeldung', 18),
+(21, 'Beim Versuch, auf Citrix-Anwendungen zuzugreifen, erhalte ich eine Fehlermeldung, dass die Verbindung nicht hergestellt werden kann. Ich benötige dringend Zugriff auf meine Citrix-Anwendungen für meine Arbeit. Bitte helfen Sie mir, dieses Problem zu lösen.', 'Citrix', 'mittel', '2024-05-14', 'In Bearbeitung', 'Citrix Fehlermeldung', 18);
 
 -- --------------------------------------------------------
 
@@ -117,10 +135,10 @@ INSERT INTO `users` (`uid`, `username`, `rolle`, `password`) VALUES
 CREATE TABLE `users_tickets_view` (
 `description` varchar(1500)
 ,`tid` int(10)
-,`category` enum('E-Mail','Windows','Hardware','Citrix','Software')
+,`category` enum('E-Mail','Windows','Hardware','Citrix','Software','Sonstiges')
 ,`priority` enum('niedrig','mittel','hoch','')
 ,`timestamp` date
-,`status` enum('neu','in_bearbeitung','fertig','')
+,`status` enum('Neu','In Bearbeitung','Fertig')
 ,`title` varchar(150)
 ,`username` varchar(50)
 ,`uid` int(4)
@@ -177,7 +195,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `nid` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `nid` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT für Tabelle `tickets`

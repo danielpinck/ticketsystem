@@ -6,7 +6,7 @@ können. Fremde Tickets sollen für sie verborgen sein.
 session_start();
 
 // Datenbankverbindung
-$db = new PDO('mysql:host=localhost;dbname=bfw_ticket_system;charset=utf8mb4', 'root');
+$db = new PDO('mysql:host=localhost;dbname=bfw_ticket_system;charset=utf8mb4', 'username', 'password');
 
 // Funktion zum Erstellen eines Tickets durch einen Benutzer
 function createTicket($db, $title, $description, $priority, $userId) {

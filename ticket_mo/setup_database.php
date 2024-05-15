@@ -21,7 +21,7 @@ $queries = [
         priority ENUM('niedrig', 'mittel', 'hoch') NOT NULL,
         status ENUM('offen', 'in Bearbeitung', 'geschlossen') NOT NULL DEFAULT 'offen',
         user_id INT,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )"
 ];
 
@@ -31,18 +31,18 @@ foreach ($queries as $query) {
 }
 
 // Beispiel Benutzer und Tickets hinzufügen
-$addUsers = $db->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
-$addUsers->execute([
-    ':username' => 'admin',
-    ':password' => password_hash('adminpass', PASSWORD_DEFAULT), // Passwort sollte gehasht gespeichert werden
-    ':role' => 'admin'
-]);
+// $addUsers = $db->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
+// $addUsers->execute([
+//     ':username' => 'admin',
+//     ':password' => password_hash('adminpass', PASSWORD_DEFAULT), // Passwort sollte gehasht gespeichert werden
+//     ':role' => 'admin'
+// ]);
 
-$addUsers->execute([
-    ':username' => 'support',
-    ':password' => password_hash('supportpass', PASSWORD_DEFAULT),
-    ':role' => 'support'
-]);
+// $addUsers->execute([
+//     ':username' => 'support',
+//     ':password' => password_hash('supportpass', PASSWORD_DEFAULT),
+//     ':role' => 'support'
+// ]);
 
 $addTicket = $db->prepare("INSERT INTO tickets (title, description, priority, user_id) VALUES (:title, :description, :priority, :user_id)");
 $addTicket->execute([

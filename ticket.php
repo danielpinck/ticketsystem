@@ -10,19 +10,12 @@ class Ticket {
     private $priority;
     private $created_by;
     private $db;
+    private $notiz;
 
 
     public function __construct($db) {
         $this->db = $db;
         $this->created_by = $_SESSION["user_id"];
-    }
-
-    public function setTicketId($tid) {
-      $this->tid = $tid;
-    }
-
-    public function getTid() {
-      return $this->tid;
     }
     
     public function setTicketTitle($title) {
@@ -48,24 +41,25 @@ class Ticket {
     public function setTicketStatus($status) {
         $this->status = $status;
       }
-    
+    public function getTicketStatus($status) {
+      return $this->created_by;
+      }
     public function getCreatedBy() {
       return $this->created_by;
-
     }
-
-
-
-    public function getAllTickets($status = null, $category = null, $tid = null) {
+    public function getAllTickets($status = null, $category = null, $priority = null, $tid = null) {
       $ticketQuery = "SELECT * FROM users_tickets_view";
       $conditions = [];
   
-      // Add conditions for statusand category if provided
+      // Add conditions for status and category if provided
       if ($status !== null) {
           $conditions[] = "status = '$status'";
       }
       if ($category !== null) {
           $conditions[] = "category = '$category'";
+      }
+      if ($priority !== null) {
+          $conditions[] = "priority = '$priority'";
       }
       if ($tid !== null) {
           $conditions[] = "tid = '$tid'";
@@ -91,17 +85,17 @@ class Ticket {
                   "Kategorie" => $row["category"],
                   "Erstellt am" => $row["timestamp"],
                   "Priorität" => $row["priority"],
-                  "Status" => $row["status"]
+                  "Status" => $row["status"],
+                  "User ID" => $row["uid"]
               );
           }
-          return $customArray;
+          return $customArray ?? [];
       } else {
           // Error handling, not implemented
           return false;
       }
   }
   
-
     public function getAllTicketsTemp() {
       $ticketQuery = "SELECT * FROM users_tickets_view ORDER BY tid DESC";
       $ticketArray = array();
@@ -154,7 +148,8 @@ class Ticket {
               "Kategorie" => $row["category"],
               "Erstellt am"=> $row["timestamp"],
               "Priorität"=> $row["priority"],
-              "Status"=> $row["status"]
+              "Status"=> $row["status"],
+              "User ID" => $row["uid"]
             );
             return $customArray;
         } else {
@@ -174,14 +169,47 @@ class Ticket {
         
       }
 
-      public function createNote() {
-
+      public function setNotiz($notiz) {
+        $this->notiz = $notiz;
+        
       }
 
-      
+      public function getNotiz($tid) {
+        // mysql statement
+        $notizQuery = "SELECT * FROM notes WHERE tid = ?";
+    
+        // execute mysql query
+        $notizResult = $this->db->execute_query($notizQuery, [$tid]);
+        
+        // check if query was successful
+        if ($notizResult) {
+            // fetch & return $notizResult
+            while ($row = $notizResult->fetch_assoc()) {
+              $customArray[] = array(
+                  "Ticket ID" => $row["tid"],
+                  "Notiz" => $row["text"],
+                  "Notiz ID" => $row["nid"],
+                  "User ID" => $row["uid"]
+              );
+          }
+            return $customArray;
+        } else {
+            // for error handling. not implemented
+            return false;
+        }
+      }
+
+      public function createNotiz($tid, $uid, $notiz) {
+
+        $sqlCreateNotiz = "INSERT INTO notes (tid, uid, text) VALUES (?, ?, ?)";
+    
+        $createNotiz = $this->db->execute_query($sqlCreateNotiz, [$tid, $uid, $notiz]);
+        return $createNotiz;
+     
+      }      
       public function changeStatus($tid, $status) {
         $changeStatus = "UPDATE tickets SET status = ? WHERE tid = ?";
-        $createTicket = $this->db->execute_query($changeStatus, [$this->status, $this->tid]);
+        $createTicket = $this->db->execute_query($changeStatus, [$status, $tid]);
       }
 
     //   public function getTicketDescription($description) {
