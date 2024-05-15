@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Mai 2024 um 17:40
+-- Erstellungszeit: 15. Mai 2024 um 23:18
 -- Server-Version: 10.4.32-MariaDB
 -- PHP-Version: 8.2.12
 
@@ -51,7 +51,13 @@ INSERT INTO `notes` (`nid`, `tid`, `uid`, `text`) VALUES
 (20, 21, 18, 'fsdfs'),
 (21, 20, 18, 'fsdfs'),
 (22, 8, 18, 'gfdgdg'),
-(23, 21, 18, '');
+(23, 21, 18, ''),
+(24, 27, 16, 'dsfsdfdsf'),
+(25, 18, 18, ''),
+(26, 18, 18, ''),
+(27, 25, 16, ''),
+(28, 27, 16, ''),
+(29, 27, 16, '');
 
 -- --------------------------------------------------------
 
@@ -90,7 +96,12 @@ INSERT INTO `tickets` (`tid`, `description`, `category`, `priority`, `timestamp`
 (18, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
 (19, 'Hardware Ticket Beschreibung', 'Hardware', 'niedrig', '2024-05-14', 'Neu', 'Hardware Ticket', 18),
 (20, 'Citrix FehlermeldungCitrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung Citrix Fehlermeldung', 'Citrix', 'hoch', '2024-05-14', 'In Bearbeitung', 'Citrix Fehlermeldung', 18),
-(21, 'Beim Versuch, auf Citrix-Anwendungen zuzugreifen, erhalte ich eine Fehlermeldung, dass die Verbindung nicht hergestellt werden kann. Ich benötige dringend Zugriff auf meine Citrix-Anwendungen für meine Arbeit. Bitte helfen Sie mir, dieses Problem zu lösen.', 'Citrix', 'mittel', '2024-05-14', 'In Bearbeitung', 'Citrix Fehlermeldung', 18);
+(21, 'Beim Versuch, auf Citrix-Anwendungen zuzugreifen, erhalte ich eine Fehlermeldung, dass die Verbindung nicht hergestellt werden kann. Ich benötige dringend Zugriff auf meine Citrix-Anwendungen für meine Arbeit. Bitte helfen Sie mir, dieses Problem zu lösen.', 'Citrix', 'mittel', '2024-05-14', 'In Bearbeitung', 'Citrix Fehlermeldung', 18),
+(23, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'Windows', 'hoch', '2024-05-15', 'Neu', 'Test from Dashboard', 16),
+(24, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'Windows', 'hoch', '2024-05-15', 'Neu', 'Test from Dashboard', 16),
+(25, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'Windows', 'hoch', '2024-05-15', 'Neu', 'Test from Dashboard', 16),
+(26, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'Windows', 'hoch', '2024-05-15', 'Neu', 'Test from Dashboard', 16),
+(27, 'ohfsdh f sdf sdef fsdf sdf sdf sdfrwef ', 'Software', 'niedrig', '2024-05-15', 'Neu', 'test', 16);
 
 -- --------------------------------------------------------
 
@@ -195,13 +206,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `nid` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `nid` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT für Tabelle `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `tid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `tid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
