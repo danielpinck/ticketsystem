@@ -1,10 +1,12 @@
 <?php
-$css_file = "ticket.css";
+// $css_file = "ticket.css";
 include "header.php";
 // Database Connection class
 include "DatabaseConnection.php";
 include "ticket.php";
-include "SessionHandler.php";
+if (empty($_SESSION)) {
+    include 'SessionHandler.php';
+}
 
 
 // Parameter for Database Connection
@@ -19,7 +21,10 @@ $dbconnection = new DatabaseConnection($servername, $username_sql, $password_sql
 
 // mysqli connection object
 $conn = $dbconnection->getConnection();
-$sessionhandler = new SessionHandling();
+if (empty($_SESSION)) {
+    $sessionhandler = new SessionHandling();
+}
+
 
 
 ?>

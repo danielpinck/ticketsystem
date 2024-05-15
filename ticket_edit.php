@@ -4,7 +4,9 @@ include "header.php";
 // Database Connection class
 include "DatabaseConnection.php";
 include "ticket.php";
-include "SessionHandler.php";
+if (empty($_SESSION)) {
+  include 'SessionHandler.php';
+}
 
 
 // Parameter for Database Connection
@@ -19,7 +21,10 @@ $dbconnection = new DatabaseConnection($servername, $username_sql, $password_sql
 
 // mysqli connection object
 $conn = $dbconnection->getConnection();
-$sessionhandler = new SessionHandling();
+if (empty($_SESSION)) {
+  $sessionhandler = new SessionHandling();
+}
+
 
 $ticket_id = $_GET['tid'];
 $ticket = new Ticket($conn);
@@ -55,15 +60,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       exit;
   }
   } 
-  else {
-      echo "Fill in all fields.";
-  }
+  // else {
+  //     echo "Fill in all fields.";
+  // }
 // }
 
 ?>
 <div class="ticket-info">
     <div class="ticket-container">
-<a href="ticket_support.php" class="ticket-status">Zurück</a>
+<a href="dashboard.php?page=tickets" class="ticket-status">Zurück</a>
 </div>
 </div>
 <div class="ticket-info">
@@ -92,12 +97,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
      
       <div class="support-notes">
-        <p><strong>Support Notizen:</strong></p>
-        
-        <?php 
+      <?php 
         $getNotiz = $ticket->getNotiz($singleTicket['Ticket ID']);
 
         if ($getNotiz) {
+          echo '<p><strong>Support Notizen:</strong></p>';
           // var_dump($getNotiz);
           foreach ($getNotiz as $row) {
             echo "<div class='notiz-box'>" . $row['Notiz'] . $row['User ID'] . "</div><br>";
@@ -105,12 +109,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }
         ?>
-        
-        <!-- Placeholder for existing support notes -->
       </div>
       
       <div class="new-support-note">
-      <form action="ticket_testing.php?tid=<?php echo $ticket_id?>" method="post">
+      <form action="dashboard.php?page=ticket_edit&tid=<?php echo $ticket_id?>" method="post">
         <textarea id="notiz" name="notiz"  placeholder="Neue Support-Notiz" style="width: 70%;"></textarea>
       </div>
       <div class="change-status">

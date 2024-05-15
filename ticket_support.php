@@ -1,10 +1,12 @@
 <?php 
-$css_file = "ticket_support.css";
-include "header.php";
+// $css_file = "ticket_support.css";
+// include "header.php";
 // Database Connection class
 include "DatabaseConnection.php";
 include "ticket.php";
-include "SessionHandler.php";
+if (empty($_SESSION)) {
+  include 'SessionHandler.php';
+}
 
 
 // Parameter for Database Connection
@@ -19,7 +21,9 @@ $dbconnection = new DatabaseConnection($servername, $username_sql, $password_sql
 
 // mysqli connection object
 $conn = $dbconnection->getConnection();
-$sessionhandler = new SessionHandling();
+if (empty($_SESSION)) {
+  $sessionhandler = new SessionHandling();
+}
 
 
 $ticket = new Ticket($conn);
@@ -31,11 +35,14 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 $priority = isset($_GET['priority']) ? $_GET['priority'] : null;
 $ticket_id = isset($_GET['tid']) ? $_GET['tid'] : null;
+$uid = isset($_GET['uid']) ? $_GET['uid'] : null;
 
 ?>
+<div class="right-column">
 <div class="link-container">
 
 <?php
+
 // Get the current URL without any parameters
 $currentUrl = strtok($_SERVER["REQUEST_URI"], '?');
 
@@ -54,7 +61,7 @@ $priorityQueryParam = $priority ? '&priority=' . $priority : '';
 $statusValues = $dbconnection->fetchEnumValues('tickets', 'status');
 echo '<a href="' . $urlWithoutStatus . '" class="ticket-' . (!$status && $status != "status" ? 'active-stat' : 'status') . '">Alle</a> ';
 foreach ($statusValues as $value) {
-  echo '<a href="?status=' . $value . $categoryQueryParam . $priorityQueryParam . '" class="ticket-' . ($status && $status == $value ? 'active-stat' : 'status') . '">' . $value . '</a> ';
+  echo '<a href="' . $urlWithoutStatus . '&status=' . $value . $categoryQueryParam . $priorityQueryParam . '" class="ticket-' . ($status && $status == $value ? 'active-stat' : 'status') . '">' . $value . '</a> ';
 }
 
 ?>
@@ -63,7 +70,7 @@ foreach ($statusValues as $value) {
 echo '<a href="' . $urlWithoutCategory . '" class="ticket-' . (!$category && $category != 'category' ? 'active-cat' : 'category') . '">Alle</a> ';
 $categoryValues = $dbconnection->fetchEnumValues('tickets', 'category');
 foreach ($categoryValues as $value) {
-  echo '<a href="?category=' . $value . $statusQueryParam . $priorityQueryParam . '" class="ticket-' . ($category && $category == $value ? 'active-cat' : 'category') . '">' . $value . '</a> ';
+  echo '<a href="' . $urlWithoutCategory . '&category=' . $value . $statusQueryParam . $priorityQueryParam . '" class="ticket-' . ($category && $category == $value ? 'active-cat' : 'category') . '">' . $value . '</a> ';
 }
 ?>
 <br>
@@ -71,25 +78,22 @@ foreach ($categoryValues as $value) {
 echo '<a href="' . $urlWithoutPriority . '" class="ticket-' . (!$priority && $priority != 'priority' ? 'active-prio' : 'priority') . '">Alle</a> ';
 $priorityValues = $dbconnection->fetchEnumValues('tickets', 'priority');
 foreach ($priorityValues as $value) {
-  echo '<a href="?priority=' . $value . $statusQueryParam . $categoryQueryParam . '" class="ticket-' . ($priority && $priority == $value ? 'active-prio' : 'priority') . '">' . $value . '</a> ';
+  echo '<a href="' . $urlWithoutPriority . '&priority=' . $value . $statusQueryParam . $categoryQueryParam . '" class="ticket-' . ($priority && $priority == $value ? 'active-prio' : 'priority') . '">' . $value . '</a> ';
 }
 
-// $priorityValues = $dbconnection->fetchEnumValues('tickets', '?status');
-// foreach ($priorityValues as $value) {
-//   echo '<a href="?priority=' . $value . '" class="ticket-status">' . $value . '</a> ';
-// }
+
 
 ?>
 
 </div>
 <br><br>
-<div class="ticket-info"></div>
+<div class="ticket-info">
 
 <?php 
-  if (!empty($ticket->getAllTickets($status, $category, $priority, $ticket_id))) {
+  if (!empty($ticket->getAllTickets($status, $category, $priority, $ticket_id, $uid))) {
 
-    foreach ($ticket->getAllTickets($status, $category, $priority, $ticket_id) as $row) { ?>
-    <a href="ticket_testing.php?tid=<?php echo $row['Ticket ID']; ?>">
+    foreach ($ticket->getAllTickets($status, $category, $priority, $ticket_id, $uid) as $row) { ?>
+    <a href="dashboard.php?page=ticket_edit&tid=<?php echo $row['Ticket ID']; ?>">
     <div class="ticket-container">
       <div class="ticket-header">
         <p class="ticket-id"><?php echo $row['Ticket ID']; ?></p>
@@ -113,18 +117,31 @@ foreach ($priorityValues as $value) {
       </div>
      
       <div class="support-notes">
-        <p><strong>Support Notizen:</strong></p>
-        <!-- Placeholder for existing support notes -->
+        
+        <?php 
+        $getNotiz = $ticket->getNotiz($row['Ticket ID']);
+
+        if ($getNotiz) {
+          echo '<p><strong>Support Notizen:</strong></p>';
+          // var_dump($getNotiz);
+          foreach ($getNotiz as $row) {
+            echo "<div class='notiz-box'>" . $row['Notiz'] . $row['User ID'] . "</div><br>";
+          }
+
+        }
+        ?>
       </div>
       
     </div>
   </a>
   <?php }
   } else {
-    echo "No tickets found matching your criteria";
+    
+    echo '<div class="ticket-container">No tickets found matching your criteria</div>';
   }
    ?>
 </div>
+
 
 
 

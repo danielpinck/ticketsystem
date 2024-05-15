@@ -1,7 +1,18 @@
 
 <div class="ticket-info">
     <div class="ticket-container">
-<a href="ticket_support.php" class="ticket-status">Zurück</a>
+      <?php 
+    if (isset($_SESSION['rolle'])) {
+      $rolle = $_SESSION['rolle'];
+      if ($rolle === 'user') {
+        echo '<a href="dashboard.php?page=tickets" class="ticket-status">Zurück</a>';
+      }
+
+      } elseif ($rolle === 'support') {
+        echo '<a href="ticket_support.php?get=tickets" class="ticket-status">Zurück</a>';
+      }
+        ?>
+
 </div>
 </div>
 <div class="ticket-info">
@@ -29,7 +40,17 @@
 
     <div class="support-notes">
       <p><strong>Support Notizen:</strong></p>
-      <!-- Placeholder for existing support notes -->
+      <?php 
+        $getNotiz = $ticket->getNotiz($singleTicket['Ticket ID']);
+
+        if ($getNotiz) {
+          // var_dump($getNotiz);
+          foreach ($getNotiz as $row) {
+            echo "<div class='notiz-box'>" . $row['Notiz'] . $row['User ID'] . "</div><br>";
+          }
+
+        }
+        ?>
     </div>
   </div>
 </div>

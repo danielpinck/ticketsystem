@@ -5,8 +5,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background: linear-gradient(to right, #b7daff 10%, #f0f0f0 18%);
   font-family: sans-serif;
+
 }
 
 .signin-box {

@@ -47,7 +47,7 @@ class Ticket {
     public function getCreatedBy() {
       return $this->created_by;
     }
-    public function getAllTickets($status = null, $category = null, $priority = null, $tid = null) {
+    public function getAllTickets($status = null, $category = null, $priority = null, $tid = null, $uid = null) {
       $ticketQuery = "SELECT * FROM users_tickets_view";
       $conditions = [];
   
@@ -63,6 +63,9 @@ class Ticket {
       }
       if ($tid !== null) {
           $conditions[] = "tid = '$tid'";
+      }
+      if ($uid !== null) {
+          $conditions[] = "uid = '$uid'";
       }
   
       // Add WHERE clause if conditions are provided
@@ -95,40 +98,6 @@ class Ticket {
           return false;
       }
   }
-  
-    public function getAllTicketsTemp() {
-      $ticketQuery = "SELECT * FROM users_tickets_view ORDER BY tid DESC";
-      $ticketArray = array();
-
-      $ticketResult = $this->db->execute_query($ticketQuery);
-      // while ($row = $ticketResult->fetch_assoc()) {
-      //     $ticketArray[] = $row;
-      // }
-      // return $ticketArray;
-
-      if ($ticketResult) {
-        // fetch & return $ticketResult
-        while ($row = $ticketResult->fetch_assoc()) {
-        $customArray[] = array(
-          "Titel"=> $row["title"],
-          "Ticket ID"=> $row["tid"],
-          "Beschreibung"=> $row["description"],
-          "Erstellt von" => $row["username"],
-          "Kategorie" => $row["category"],
-          "Erstellt am"=> $row["timestamp"],
-          "Priorität"=> $row["priority"],
-          "Status"=> $row["status"]
-          
-        );
-      }
-        return $customArray;
-      } else {
-          // for error handling. not implemented
-          return false;
-      }
-        
-      }
-
       public function getSingleTicket($tid) {
         // mysql statement
         $ticketQuery = "SELECT * FROM users_tickets_view WHERE tid = ?";
@@ -175,6 +144,7 @@ class Ticket {
       }
 
       public function getNotiz($tid) {
+        $customArray = [];
         // mysql statement
         $notizQuery = "SELECT * FROM notes WHERE tid = ?";
     
@@ -212,28 +182,5 @@ class Ticket {
         $createTicket = $this->db->execute_query($changeStatus, [$status, $tid]);
       }
 
-    //   public function getTicketDescription($description) {
-    //     $titleQuery = "SELECT 'title' FROM tickets";
-    //     $titleResult = $this->db->execute_query($titleQuery, [$this->title]);
-    //     return $titleResult;
-    //   }
-
-    // public function getTicketCategory($category) {
-    //     $titleQuery = "SELECT 'title' FROM tickets";
-    //     $titleResult = $this->db->execute_query($titleQuery, [$this->title]);
-    //     return $titleResult;
-    //   }
-
-    // public function getTicketTimeCreated($timeCreated) {
-    //     $titleQuery = "SELECT 'title' FROM tickets";
-    //     $titleResult = $this->db->execute_query($titleQuery, [$this->title]);
-    //     return $titleResult;
-    //   }
-
-    // public function getTicketStatus($status) {
-    //     $titleQuery = "SELECT 'title' FROM tickets";
-    //     $titleResult = $this->db->execute_query($titleQuery, [$this->title]);
-    //     return $titleResult;
-    //   }
 
 }
