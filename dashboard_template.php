@@ -1,7 +1,7 @@
 <div class="container">
   <div class="column left-column">
   <?php 
-    echo "<h1>".$_SESSION['username']."</h1>";
+    echo "<h1>".$_SESSION['username']."(".$_SESSION['rolle'].")</h1>";
     if (isset($_SESSION['rolle'])) {
       $rolle = $_SESSION['rolle'];
       if ($rolle === 'user') {
@@ -9,11 +9,11 @@
         
 
       } elseif ($rolle === 'support') {
-        echo '<a href="#">My Tickets</a><br>';
-        echo '<a href="#">Show Tickets</a><br>';
+
+        echo '<a href="?page=tickets">Show Tickets</a><br>';
       } elseif ($rolle === 'admin') {
-        echo '<a href="#">Show Tickets</a><br>';
-        echo '<a href="#">Show Users</a><br>';
+
+        echo '<a href="?page=tickets">Show Tickets</a><br>';
         
       }
       echo '<a href="destroy_session.php">Logout</a><br>';

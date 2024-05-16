@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Mai 2024 um 23:18
+-- Erstellungszeit: 16. Mai 2024 um 13:13
 -- Server-Version: 10.4.32-MariaDB
 -- PHP-Version: 8.2.12
 
@@ -44,11 +44,6 @@ INSERT INTO `notes` (`nid`, `tid`, `uid`, `text`) VALUES
 (6, 21, 18, 'hfdhfdhdfh'),
 (7, 18, 18, 'sdfsdfsdf'),
 (15, 21, 18, 'hfghfghfgh'),
-(16, 21, 18, 'fsdfsf'),
-(17, 21, 18, 'fsdfsf'),
-(18, 21, 18, 'sdfsdf'),
-(19, 21, 18, 'fsdfsf'),
-(20, 21, 18, 'fsdfs'),
 (21, 20, 18, 'fsdfs'),
 (22, 8, 18, 'gfdgdg'),
 (23, 21, 18, ''),
@@ -57,7 +52,10 @@ INSERT INTO `notes` (`nid`, `tid`, `uid`, `text`) VALUES
 (26, 18, 18, ''),
 (27, 25, 16, ''),
 (28, 27, 16, ''),
-(29, 27, 16, '');
+(29, 27, 16, ''),
+(30, 27, 16, 'test notiz'),
+(31, 7, 18, 'Das ist dein Problem und mir egal'),
+(32, 7, 18, 'Ist mir immer noch egal');
 
 -- --------------------------------------------------------
 
@@ -82,7 +80,7 @@ CREATE TABLE `tickets` (
 
 INSERT INTO `tickets` (`tid`, `description`, `category`, `priority`, `timestamp`, `status`, `title`, `created_by`) VALUES
 (6, 'gdfgd', 'E-Mail', 'niedrig', '2024-05-14', 'Neu', 'gfdgd', 18),
-(7, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'Neu', 'E-Mail Anmeldung funktioniert nicht', 18),
+(7, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'In Bearbeitung', 'E-Mail Anmeldung funktioniert nicht', 18),
 (8, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'In Bearbeitung', 'E-Mail Anmeldung funktioniert nicht', 18),
 (9, 'Ich kann keine E-Mails senden oder empfangen. Es scheint, dass mein E-Mail-Konto nicht richtig konfiguriert ist. Bitte überprüfen Sie die Servereinstellungen und helfen Sie mir, dieses Problem zu lösen.', 'E-Mail', 'hoch', '2024-05-14', 'Neu', 'E-Mail Anmeldung funktioniert nicht', 18),
 (10, 'gzh65h56h jhgkhkjhk jhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\njhgkhkjhk\r\nvjhgkhkjhkjhgkhkjhkjhgkhkjhk', 'E-Mail', 'mittel', '2024-05-14', 'Neu', 'fsdfsdf jhgkhkjhk', 18),
@@ -101,18 +99,8 @@ INSERT INTO `tickets` (`tid`, `description`, `category`, `priority`, `timestamp`
 (24, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'Windows', 'hoch', '2024-05-15', 'Neu', 'Test from Dashboard', 16),
 (25, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'Windows', 'hoch', '2024-05-15', 'Neu', 'Test from Dashboard', 16),
 (26, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'Windows', 'hoch', '2024-05-15', 'Neu', 'Test from Dashboard', 16),
-(27, 'ohfsdh f sdf sdef fsdf sdf sdf sdfrwef ', 'Software', 'niedrig', '2024-05-15', 'Neu', 'test', 16);
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `ticket_support`
---
-
-CREATE TABLE `ticket_support` (
-  `uid` int(4) DEFAULT NULL,
-  `tid` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(27, 'ohfsdh f sdf sdef fsdf sdf sdf sdfrwef ', 'Software', 'niedrig', '2024-05-15', 'Neu', 'test', 16),
+(28, 'wie immer', 'Citrix', 'mittel', '2024-05-16', 'Neu', 'Citrix funktioniert nicht', 19);
 
 -- --------------------------------------------------------
 
@@ -132,9 +120,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `username`, `rolle`, `password`) VALUES
-(16, 'a', 'user', 'b'),
+(16, 'user', 'user', 'b'),
 (18, 'admin', 'admin', 'pw'),
-(19, 'test', 'user', '$2y$10$d2PJffcA/XltQpuPrRNmwuPny1tyG9LrE4kcKIDMED/4qVBzckUb2'),
+(19, 'support-user', 'user', 'pw'),
 (20, 'testuser', 'user', '$2y$10$TNvxUSNQUcfBT5PUhebwUeiBcRly1Ym/lXRoHpHtOsgnzr7YuqL0K');
 
 -- --------------------------------------------------------
@@ -185,13 +173,6 @@ ALTER TABLE `tickets`
   ADD KEY `created_by` (`created_by`);
 
 --
--- Indizes für die Tabelle `ticket_support`
---
-ALTER TABLE `ticket_support`
-  ADD KEY `uid` (`uid`),
-  ADD KEY `tid` (`tid`);
-
---
 -- Indizes für die Tabelle `users`
 --
 ALTER TABLE `users`
@@ -206,13 +187,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `nid` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `nid` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT für Tabelle `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `tid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `tid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`

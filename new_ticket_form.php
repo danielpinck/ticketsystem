@@ -1,3 +1,4 @@
+<div class="container">
 <div class="ticket-form">
     <h1>Neues Ticket erstellen</h1>
     <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
@@ -26,4 +27,5 @@
         
         <button type="submit">Ticket erstellen</button>
     </form>
+  </div>
   </div>

@@ -1,6 +1,6 @@
 <?php
 // $css_file = "ticket.css";
-include "header.php";
+// include "header.php";
 // Database Connection class
 include "DatabaseConnection.php";
 include "ticket.php";
@@ -67,5 +67,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 include_once "new_ticket_form.php";
 // close db connection when finished
 $dbconnection->closeConnection();
-include "footer.php";
+// include "footer.php";
 ?>

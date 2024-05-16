@@ -4,6 +4,6 @@ $sessionhandler = new SessionHandling();
 $sessionhandler->destroySession();
 
 $sessionhandler->setLoggedOutMessage("You are logged out");
-header("Location: index_testing2.php");
+header("Location: index.php");
 exit;
   

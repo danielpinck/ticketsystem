@@ -48,6 +48,8 @@ class Ticket {
       return $this->created_by;
     }
     public function getAllTickets($status = null, $category = null, $priority = null, $tid = null, $uid = null) {
+      // $ticketQuery = "SELECT * FROM users_tickets_view";
+
       $ticketQuery = "SELECT * FROM users_tickets_view";
       $conditions = [];
   
@@ -73,7 +75,7 @@ class Ticket {
           $ticketQuery .= " WHERE " . implode(" AND ", $conditions);
       }
   
-      $ticketQuery .= " ORDER BY tid DESC";
+      $ticketQuery .= " ORDER BY priority DESC, DATE_FORMAT(timestamp, '%Y-%m-%d')";
   
       $ticketArray = array();
       $ticketResult = $this->db->execute_query($ticketQuery);

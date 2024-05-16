@@ -27,8 +27,8 @@ if (empty($_SESSION)) {
 
 
 $ticket = new Ticket($conn);
-$sessionhandler->getSessionValue("rolle");
-$sessionhandler->getSessionValue("user_id");
+$rolle = $sessionhandler->getSessionValue("rolle");
+$uid = $sessionhandler->getSessionValue("user_id");
 // echo "Rolle: " . $_SESSION['rolle'];
 // echo "User ID " . $_SESSION['user_id'];
 $status = isset($_GET['status']) ? $_GET['status'] : null;
@@ -90,6 +90,7 @@ foreach ($priorityValues as $value) {
 <div class="ticket-info">
 
 <?php 
+
   if (!empty($ticket->getAllTickets($status, $category, $priority, $ticket_id, $uid))) {
 
     foreach ($ticket->getAllTickets($status, $category, $priority, $ticket_id, $uid) as $row) { ?>

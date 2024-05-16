@@ -1,4 +1,4 @@
-html, body {
+/* html, body {
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -8,6 +8,14 @@ html, body {
   background-color: #f0f0f0;
   font-family: sans-serif;
   font-size: small;
+} */
+
+.container {
+
+  justify-content: center;
+
+
+
 }
 
 .ticket-form {
@@ -16,6 +24,9 @@ html, body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
+  width: 600px;
+
+  
 }
 
 .ticket-form h1 {

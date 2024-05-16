@@ -10,7 +10,7 @@ $sessionhandler = new SessionHandling();
 // Check if the user is logged in
 if (empty($_SESSION["username"]) || !isset($_SESSION["username"])) { 
     // If not logged in, redirect to the login page
-    header("Location: index_testing2.php");
+    header("Location: index.php");
     exit; // Ensure to stop further execution after redirection
 }
 
